@@ -4,6 +4,7 @@ import com.example.shop.security.models.Client;
 import com.example.shop.security.models.Seller;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -27,6 +28,9 @@ public class Product {
 
     @Column(name = "product_category")
     private String category;
+
+    @Column(name = "date_of_adding")
+    private Date date_of_adding;
 
     @ManyToMany
     @JoinTable(
@@ -87,10 +91,6 @@ public class Product {
         this.category = category;
     }
 
-    public Set<Client> getCustomers() {
-        return customers;
-    }
-
     public void setCustomers(Set<Client> customers) {
         this.customers = customers;
     }
@@ -101,5 +101,13 @@ public class Product {
 
     public void setSeller(Seller seller) {
         this.seller = seller;
+    }
+
+    public Date getDate_of_adding() {
+        return date_of_adding;
+    }
+
+    public void setDate_of_adding(Date date_of_adding) {
+        this.date_of_adding = date_of_adding;
     }
 }

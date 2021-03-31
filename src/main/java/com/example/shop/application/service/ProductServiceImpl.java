@@ -3,6 +3,7 @@ package com.example.shop.application.service;
 import com.example.shop.application.models.Product;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void saveProduct(Product product) {
+        product.setDate_of_adding(new Date());
         productRepository.save(product);
     }
 
