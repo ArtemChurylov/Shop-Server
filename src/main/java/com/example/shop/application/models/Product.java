@@ -32,6 +32,10 @@ public class Product {
     @Column(name = "date_of_adding")
     private Date date_of_adding;
 
+    @Lob
+    @Column(name = "image")
+    private String image;
+
     @ManyToMany
     @JoinTable(
             name = "product_client",
@@ -95,7 +99,15 @@ public class Product {
         this.customers = customers;
     }
 
+    public Set<Client> getCustomers() {
+        for (Client c : customers) {
+            c.setOrders(null);
+        }
+        return customers;
+    }
+
     public Seller getSeller() {
+        seller.setProducts(null);
         return seller;
     }
 
@@ -109,5 +121,13 @@ public class Product {
 
     public void setDate_of_adding(Date date_of_adding) {
         this.date_of_adding = date_of_adding;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

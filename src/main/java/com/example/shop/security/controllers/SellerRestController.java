@@ -21,13 +21,20 @@ public class SellerRestController {
 
     @GetMapping
     public ResponseEntity<List<Seller>> getAllSellers() {
-        return new ResponseEntity<>(sellerService.getAllSellers(), HttpStatus.OK);
+        List<Seller> sellers = sellerService.getAllSellers();
+
+        for (Seller s : sellers) {
+            s.setProducts(null);
+        }
+
+        return new ResponseEntity<>(sellers, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Seller> getSellerById(@PathVariable Long id) {
         Optional<Seller> seller = sellerService.getSellerById(id);
         if (seller.isEmpty()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        seller.get().setProducts(null);
         return new ResponseEntity<>(seller.get(), HttpStatus.OK);
     }
 

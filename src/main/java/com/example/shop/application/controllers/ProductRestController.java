@@ -2,8 +2,11 @@ package com.example.shop.application.controllers;
 
 import com.example.shop.application.models.Product;
 import com.example.shop.application.service.ProductService;
+import com.example.shop.security.models.Seller;
+import com.example.shop.security.service.SellerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,9 +17,11 @@ import java.util.Optional;
 public class ProductRestController {
 
     private final ProductService productService;
+    private final SellerService sellerService;
 
-    public ProductRestController(ProductService productService) {
+    public ProductRestController(ProductService productService, SellerService sellerService) {
         this.productService = productService;
+        this.sellerService = sellerService;
     }
 
     @GetMapping
@@ -31,9 +36,13 @@ public class ProductRestController {
         return new ResponseEntity<>(product.get(), HttpStatus.OK);
     }
 
+    @Transactional
     @PostMapping
     public ResponseEntity<Product> saveProduct(@RequestBody Product product) {
         if (product == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        Seller seller = sellerService.getSellerById(product.getSeller().getId()).orElseThrow();
+        seller.getProducts().add(product);
+        sellerService.saveSeller(seller);
         productService.saveProduct(product);
         return new ResponseEntity<>(HttpStatus.OK);
     }

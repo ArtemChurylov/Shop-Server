@@ -3,8 +3,7 @@ package com.example.shop.security.models;
 import com.example.shop.application.models.Product;
 
 import javax.persistence.*;
-import java.util.Collections;
-import java.util.*;
+import java.util.List;
 
 @Entity
 @Table(name = "seller")
