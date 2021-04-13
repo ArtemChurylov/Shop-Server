@@ -20,13 +20,20 @@ public class ClientRestController {
 
     @GetMapping
     public ResponseEntity<List<Client>> getAllClients() {
-        return new ResponseEntity<>(clientService.getAllClients(), HttpStatus.OK);
+        List<Client> clients = clientService.getAllClients();
+
+        for (Client c : clients) {
+            c.setOrders(null);
+        }
+
+        return new ResponseEntity<>(clients, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Client> getClientById(@PathVariable Long id) {
         Optional<Client> client = clientService.getClientById(id);
         if (client.isEmpty()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        client.get().setOrders(null);
         return new ResponseEntity<>(client.get(), HttpStatus.OK);
     }
 

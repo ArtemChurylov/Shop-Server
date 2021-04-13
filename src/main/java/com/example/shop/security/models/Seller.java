@@ -1,5 +1,6 @@
 package com.example.shop.security.models;
 
+import com.example.shop.application.models.Notification;
 import com.example.shop.application.models.Product;
 
 import javax.persistence.*;
@@ -35,6 +36,9 @@ public class Seller implements User {
 
     @OneToMany(mappedBy = "seller")
     private List<Product> products;
+
+    @OneToMany(mappedBy = "seller")
+    private List<Notification> notifications;
 
     public Seller() {
     }
@@ -101,5 +105,13 @@ public class Seller implements User {
 
     public void setProducts(List<Product> products) {
         this.products = products;
+    }
+
+    public List<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(List<Notification> notifications) {
+        this.notifications = notifications;
     }
 }

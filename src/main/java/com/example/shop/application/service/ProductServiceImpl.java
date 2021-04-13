@@ -1,6 +1,7 @@
 package com.example.shop.application.service;
 
 import com.example.shop.application.models.Product;
+import com.example.shop.application.service.repo.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
