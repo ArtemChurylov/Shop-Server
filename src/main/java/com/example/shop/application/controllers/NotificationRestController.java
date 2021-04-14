@@ -14,12 +14,12 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/service/notification")
-public class NotificationController {
+public class NotificationRestController {
 
     private final NotificationService notificationService;
     private final SellerService sellerService;
 
-    public NotificationController(NotificationService notificationService, SellerService sellerService) {
+    public NotificationRestController(NotificationService notificationService, SellerService sellerService) {
         this.notificationService = notificationService;
         this.sellerService = sellerService;
     }
@@ -40,8 +40,8 @@ public class NotificationController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping
-    public ResponseEntity<Notification> deleteNotification(Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Notification> deleteNotification(@PathVariable Long id) {
         Optional<Notification> notification = notificationService.getNotificationById(id);
         if (notification.isEmpty()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         notificationService.deleteNotification(id);
