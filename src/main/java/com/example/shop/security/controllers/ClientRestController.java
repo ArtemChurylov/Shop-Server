@@ -57,8 +57,8 @@ public class ClientRestController {
         Client dbClient = clientService.getClientById(client.getId()).orElseThrow();
 
         Product product = client.getOrders().get(0);
-        product.getCustomers().add(dbClient);
         dbClient.getOrders().add(product);
+        product.getCustomers().add(dbClient);
         clientService.saveClient(dbClient);
         productService.saveProduct(product);
         return new ResponseEntity<>(HttpStatus.OK);
