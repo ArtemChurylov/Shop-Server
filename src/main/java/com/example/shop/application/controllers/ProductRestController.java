@@ -61,6 +61,11 @@ public class ProductRestController {
         productService.deleteProductById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/{id}/myProducts")
+    public ResponseEntity<List<Product>> getMyProducts(@PathVariable Long id) {
+        return new ResponseEntity<>(productService.getMyProducts(id), HttpStatus.OK);
+    }
 }
 
 
