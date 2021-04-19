@@ -43,4 +43,11 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getMyProducts(Long id) {
         return productRepository.findAll().stream().filter(product -> product.getSeller().getId() == id).collect(Collectors.toList());
     }
+
+    @Override
+    public List<Product> getMyOrders(Long id) {
+        return productRepository.findAll().stream()
+                .filter(product -> product.getCustomers().stream().anyMatch(client -> client.getId() == id))
+                .collect(Collectors.toList());
+    }
 }

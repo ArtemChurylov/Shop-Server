@@ -63,8 +63,13 @@ public class ProductRestController {
     }
 
     @GetMapping("/{id}/myProducts")
-    public ResponseEntity<List<Product>> getMyProducts(@PathVariable Long id) {
+    public ResponseEntity<List<Product>> getSellerProducts(@PathVariable Long id) {
         return new ResponseEntity<>(productService.getMyProducts(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/myOrders")
+    public ResponseEntity<List<Product>> getClientOrders(@PathVariable Long id) {
+        return new ResponseEntity<>(productService.getMyOrders(id), HttpStatus.OK);
     }
 }
 

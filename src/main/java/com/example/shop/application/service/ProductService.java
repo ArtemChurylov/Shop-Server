@@ -12,4 +12,7 @@ public interface ProductService {
     Optional<Product> getProductById(Long id);
     void deleteProductById(Long id);
     List<Product> getMyProducts(Long id);
+
+    List<Product> getMyOrders(Long id);
 }
+
