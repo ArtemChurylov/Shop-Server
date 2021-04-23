@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class NotificationServiceImpl implements NotificationService {
@@ -34,5 +35,11 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     public void deleteNotification(Long id) {
         notificationRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Notification> getMyNotifications(Long id) {
+
+        return getAllNotifications().stream().filter(notification -> notification.getSeller().getId() == id).collect(Collectors.toList());
     }
 }

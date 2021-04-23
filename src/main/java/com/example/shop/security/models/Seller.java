@@ -40,6 +40,9 @@ public class Seller implements User {
     @OneToMany(mappedBy = "seller")
     private List<Notification> notifications;
 
+    @Column(name = "notification_count")
+    private Integer notificationCount;
+
     public Seller() {
     }
 
@@ -113,5 +116,14 @@ public class Seller implements User {
 
     public void setNotifications(List<Notification> notifications) {
         this.notifications = notifications;
+    }
+
+    public void setNotificationCount(Integer notificationCount) {
+        this.notificationCount = notificationCount;
+    }
+
+    public Integer getNotificationCount() {
+        if(notificationCount == null) return 0;
+        return notificationCount;
     }
 }

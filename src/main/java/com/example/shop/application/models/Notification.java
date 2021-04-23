@@ -40,6 +40,7 @@ public class Notification {
     }
 
     public Seller getSeller() {
+        seller.setProducts(null);
         seller.setNotifications(null);
         return seller;
     }

@@ -25,6 +25,7 @@ public class SellerRestController {
 
         for (Seller s : sellers) {
             s.setProducts(null);
+            s.setNotifications(null);
         }
 
         return new ResponseEntity<>(sellers, HttpStatus.OK);
@@ -35,6 +36,7 @@ public class SellerRestController {
         Optional<Seller> seller = sellerService.getSellerById(id);
         if (seller.isEmpty()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         seller.get().setProducts(null);
+        seller.get().setNotifications(null);
         return new ResponseEntity<>(seller.get(), HttpStatus.OK);
     }
 

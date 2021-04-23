@@ -35,6 +35,7 @@ public class NotificationRestController {
         if (notification == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         Seller seller = sellerService.getSellerById(notification.getSeller().getId()).orElseThrow();
         seller.getNotifications().add(notification);
+        seller.setNotificationCount(seller.getNotificationCount() + 1);
         notificationService.saveNotification(notification);
         sellerService.saveSeller(seller);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -44,7 +45,13 @@ public class NotificationRestController {
     public ResponseEntity<Notification> deleteNotification(@PathVariable Long id) {
         Optional<Notification> notification = notificationService.getNotificationById(id);
         if (notification.isEmpty()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        notification.get().getSeller().setNotificationCount(notification.get().getSeller().getNotificationCount()-1);
         notificationService.deleteNotification(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/myNotifications")
+    public ResponseEntity<List<Notification>> getSellerNotifications(@PathVariable Long id) {
+        return new ResponseEntity<>(notificationService.getMyNotifications(id), HttpStatus.OK);
     }
 }
