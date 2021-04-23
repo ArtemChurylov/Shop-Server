@@ -71,6 +71,26 @@ public class ProductRestController {
     public ResponseEntity<List<Product>> getClientOrders(@PathVariable Long id) {
         return new ResponseEntity<>(productService.getMyOrders(id), HttpStatus.OK);
     }
+
+    @GetMapping("/footwear")
+    public ResponseEntity<List<Product>> getAllFootwear() {
+        return new ResponseEntity<>(productService.getFootwear(), HttpStatus.OK);
+    }
+
+    @GetMapping("/clothes")
+    public ResponseEntity<List<Product>> getAllClothes() {
+        return new ResponseEntity<>(productService.getClothes(), HttpStatus.OK);
+    }
+
+    @GetMapping("/accessories")
+    public ResponseEntity<List<Product>> getAllAccessories() {
+        return new ResponseEntity<>(productService.getAccessories(), HttpStatus.OK);
+    }
+
+    @GetMapping("/cosmetics")
+    public ResponseEntity<List<Product>> getAllCosmetics() {
+        return new ResponseEntity<>(productService.getCosmetics(), HttpStatus.OK);
+    }
 }
 
 

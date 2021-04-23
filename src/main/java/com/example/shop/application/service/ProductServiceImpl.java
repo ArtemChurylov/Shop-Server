@@ -50,4 +50,24 @@ public class ProductServiceImpl implements ProductService {
                 .filter(product -> product.getCustomers().stream().anyMatch(client -> client.getId() == id))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<Product> getFootwear() {
+        return getAllProducts().stream().filter(product -> product.getCategory().equals("FOOTWEAR")).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Product> getClothes() {
+        return getAllProducts().stream().filter(product -> product.getCategory().equals("CLOTHES")).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Product> getAccessories() {
+        return getAllProducts().stream().filter(product -> product.getCategory().equals("ACCESSORIES")).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Product> getCosmetics() {
+        return getAllProducts().stream().filter(product -> product.getCategory().equals("COSMETICS")).collect(Collectors.toList());
+    }
 }

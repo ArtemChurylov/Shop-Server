@@ -14,5 +14,10 @@ public interface ProductService {
     List<Product> getMyProducts(Long id);
 
     List<Product> getMyOrders(Long id);
+
+    List<Product> getFootwear();
+    List<Product> getClothes();
+    List<Product> getAccessories();
+    List<Product> getCosmetics();
 }
 
