@@ -19,6 +19,7 @@ public class SellerRestController {
         this.sellerService = sellerService;
     }
 
+    // Same as in client Controller. Reduce the objects and returns all sellers
     @GetMapping
     public ResponseEntity<List<Seller>> getAllSellers() {
         List<Seller> sellers = sellerService.getAllSellers();
@@ -31,6 +32,7 @@ public class SellerRestController {
         return new ResponseEntity<>(sellers, HttpStatus.OK);
     }
 
+    // Returns seller by id
     @GetMapping("/{id}")
     public ResponseEntity<Seller> getSellerById(@PathVariable Long id) {
         Optional<Seller> seller = sellerService.getSellerById(id);
@@ -40,6 +42,7 @@ public class SellerRestController {
         return new ResponseEntity<>(seller.get(), HttpStatus.OK);
     }
 
+    // Save seller
     @PostMapping
     public ResponseEntity<Seller> saveSeller(@RequestBody Seller seller) {
         if (seller == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -47,6 +50,7 @@ public class SellerRestController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    // Don`t use this method, buy if I`ll need, I can modify it
     @PutMapping
     public ResponseEntity<Seller> updateSeller(@RequestBody Seller seller) {
         if (seller == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -54,6 +58,7 @@ public class SellerRestController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    // Delete seller
     @DeleteMapping("/{id}")
     public ResponseEntity<Seller> deleteSellerById(@PathVariable Long id) {
         Optional<Seller> seller = sellerService.getSellerById(id);

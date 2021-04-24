@@ -6,9 +6,11 @@ import com.example.shop.application.models.Product;
 import javax.persistence.*;
 import java.util.List;
 
+
+// Seller model
 @Entity
 @Table(name = "seller")
-public class Seller implements User {
+public class Seller {
 
     @Id
     @Column(name = "seller_id")

@@ -37,9 +37,10 @@ public class NotificationServiceImpl implements NotificationService {
         notificationRepository.deleteById(id);
     }
 
+
+    // Returns all seller notifications
     @Override
     public List<Notification> getMyNotifications(Long id) {
-
         return getAllNotifications().stream().filter(notification -> notification.getSeller().getId() == id).collect(Collectors.toList());
     }
 }

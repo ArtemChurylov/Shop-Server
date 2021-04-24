@@ -4,6 +4,8 @@ import com.example.shop.security.models.Seller;
 
 import javax.persistence.*;
 
+
+// Notification model which seller gets after client buy his product
 @Entity
 public class Notification {
 

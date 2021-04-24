@@ -5,9 +5,11 @@ import com.example.shop.application.models.Product;
 import javax.persistence.*;
 import java.util.*;
 
+
+// Client model
 @Entity
 @Table(name = "client")
-public class Client implements User {
+public class Client {
 
     @Id
     @Column(name = "client_id")

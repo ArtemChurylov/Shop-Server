@@ -1,5 +1,6 @@
 package com.example.shop.application.service;
 
+import com.example.shop.application.models.Category;
 import com.example.shop.application.models.Product;
 import com.example.shop.application.service.repo.ProductRepository;
 import org.springframework.stereotype.Service;
@@ -39,11 +40,13 @@ public class ProductServiceImpl implements ProductService {
         productRepository.deleteById(id);
     }
 
+    // Returns all products which seller has created
     @Override
     public List<Product> getMyProducts(Long id) {
         return productRepository.findAll().stream().filter(product -> product.getSeller().getId() == id).collect(Collectors.toList());
     }
 
+    // Returns all products which client has bought
     @Override
     public List<Product> getMyOrders(Long id) {
         return productRepository.findAll().stream()
@@ -51,23 +54,27 @@ public class ProductServiceImpl implements ProductService {
                 .collect(Collectors.toList());
     }
 
+    // Filter products by footwear
     @Override
     public List<Product> getFootwear() {
-        return getAllProducts().stream().filter(product -> product.getCategory().equals("FOOTWEAR")).collect(Collectors.toList());
+        return getAllProducts().stream().filter(product -> product.getCategory().equals(Category.FOOTWEAR.name())).collect(Collectors.toList());
     }
 
+    // Filter products by clothes
     @Override
     public List<Product> getClothes() {
-        return getAllProducts().stream().filter(product -> product.getCategory().equals("CLOTHES")).collect(Collectors.toList());
+        return getAllProducts().stream().filter(product -> product.getCategory().equals(Category.CLOTHES.name())).collect(Collectors.toList());
     }
 
+    // Filter products by accessories
     @Override
     public List<Product> getAccessories() {
-        return getAllProducts().stream().filter(product -> product.getCategory().equals("ACCESSORIES")).collect(Collectors.toList());
+        return getAllProducts().stream().filter(product -> product.getCategory().equals(Category.ACCESSORIES.name())).collect(Collectors.toList());
     }
 
+    // Filter products by cosmetics
     @Override
     public List<Product> getCosmetics() {
-        return getAllProducts().stream().filter(product -> product.getCategory().equals("COSMETICS")).collect(Collectors.toList());
+        return getAllProducts().stream().filter(product -> product.getCategory().equals(Category.COSMETICS.name())).collect(Collectors.toList());
     }
 }

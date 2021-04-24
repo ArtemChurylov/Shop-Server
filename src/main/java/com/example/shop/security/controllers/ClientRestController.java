@@ -23,6 +23,7 @@ public class ClientRestController {
         this.productService = productService;
     }
 
+    // For each client I set orders == null to reduce the objects and returns all clients
     @GetMapping
     public ResponseEntity<List<Client>> getAllClients() {
         List<Client> clients = clientService.getAllClients();
@@ -34,6 +35,7 @@ public class ClientRestController {
         return new ResponseEntity<>(clients, HttpStatus.OK);
     }
 
+    // Returns client by id
     @GetMapping("/{id}")
     public ResponseEntity<Client> getClientById(@PathVariable Long id) {
         Optional<Client> client = clientService.getClientById(id);
@@ -42,6 +44,7 @@ public class ClientRestController {
         return new ResponseEntity<>(client.get(), HttpStatus.OK);
     }
 
+    // Save client
     @PostMapping
     public ResponseEntity<Client> saveClient(@RequestBody Client client) {
         if (client == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -49,6 +52,7 @@ public class ClientRestController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    // Update client when he buy product
     @Transactional
     @PutMapping
     public ResponseEntity<Client> updateClient(@RequestBody Client client) {
@@ -64,6 +68,7 @@ public class ClientRestController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    // Delete client
     @DeleteMapping("/{id}")
     public ResponseEntity<Client> deleteClientById(@PathVariable Long id) {
         Optional<Client> client = clientService.getClientById(id);

@@ -24,11 +24,13 @@ public class NotificationRestController {
         this.sellerService = sellerService;
     }
 
+    // Returns all notifications
     @GetMapping
     public ResponseEntity<List<Notification>> getAllNotifications() {
         return new ResponseEntity<>(notificationService.getAllNotifications(), HttpStatus.OK);
     }
 
+    // Add new notification to the seller, increase notificationCount and save it into db
     @Transactional
     @PostMapping
     public ResponseEntity<Notification> saveNotification(@RequestBody Notification notification) {
@@ -41,6 +43,7 @@ public class NotificationRestController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    // Decrease notificationCount and delete notification
     @DeleteMapping("/{id}")
     public ResponseEntity<Notification> deleteNotification(@PathVariable Long id) {
         Optional<Notification> notification = notificationService.getNotificationById(id);
@@ -50,6 +53,7 @@ public class NotificationRestController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    // Returns all notifications with id == seller id
     @GetMapping("/{id}/myNotifications")
     public ResponseEntity<List<Notification>> getSellerNotifications(@PathVariable Long id) {
         return new ResponseEntity<>(notificationService.getMyNotifications(id), HttpStatus.OK);

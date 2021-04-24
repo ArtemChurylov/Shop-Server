@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
+// Product model
 @Entity
 @Table(name = "product")
 public class Product {
